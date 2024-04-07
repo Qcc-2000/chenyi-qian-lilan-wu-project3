@@ -14,5 +14,8 @@
     "prod": "npm run start -w backend"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 }

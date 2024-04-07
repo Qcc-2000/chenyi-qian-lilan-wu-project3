@@ -1,35 +1,40 @@
-- User：
+```
+json
 
-  - userName (P)
-  - password
+User{
+  username
+  password
+}
 
-- Password:
 
-  - passwordId (P)
-  - userName
-  - url
-  - password
+Password:{
+  owner: string
+  url: string,
+  shared_with : [
+    username: string
+  ]
+}
 
-- Message:
 
-  - messageId (P)
-  - senderName
-  - recieverName
+Message{
+  sender
+  receiver
+}
+```
 
-- Share:
-
-  - shareId (P)
-  - owner
-  - sharer
-
-- API
-  post: /signup
-  post: /login
-  post: /logout
-  get: /messages
-  get: /passwords
-  post: /addPassword
-  delete: /deletePassword/:passwordId
-  put: /updatePassword/:passwordId
-  post: /message/:messageId?accept=true
-  post: /message/:meesageId?accept=false
+```
+API
+  [user]
+    post: /signup {username, password}
+    post: /login
+    post: /logout
+  [message]
+    get: /messages/:username
+    post: /messages  {sender, receiver}
+    post: /message/:messageId   {accept: true}
+  [password]
+    get: /passwords/:username
+    post: /passwords/ {owner, url, password}
+    put: /password/:passwordId {url, password}
+    delete: /password/:passwordId
+```

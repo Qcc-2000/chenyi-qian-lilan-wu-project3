@@ -5,7 +5,7 @@ import UserModel from "../db/user/model.js";
 
 router.post("/", async function (request, response) {
   const body = request.body;
-
+  console.log(body);
   await UserModel.createUser(body);
 
   response.send("Created new user!");
