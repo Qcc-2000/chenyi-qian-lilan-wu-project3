@@ -15,6 +15,23 @@ cd backend
 npm run dev
 ```
 
+### Run
+
+1. Install dependencies
+
+   ```bash
+   cd backend
+   npm install
+   ```
+
+2. replace the `.env.example` file with `.env` and set the environment variables
+
+3. Run the backend
+
+   ```bash
+   npm run dev
+   ```
+
 ### Resources
 
 - [MongoDB](https://www.mongodb.com/)
