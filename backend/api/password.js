@@ -24,7 +24,7 @@ router.post("/", async function (req, res) {
   res.send("Password created!");
 });
 
-router.put("/", async function (req, res) {
+router.put("/:passwordId", async function (req, res) {
   const password = req.body;
   await PasswordModel.updatePassword(password);
   res.send("Password updated!");

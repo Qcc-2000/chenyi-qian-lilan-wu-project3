@@ -23,10 +23,9 @@ Message{
 ```
 
 ```
-API
   [user]
     post: /signup {username, password}
-    post: /login
+    post: /login  {username, password}
     post: /logout
   [message]
     get: /messages/:username
@@ -38,3 +37,7 @@ API
     put: /password/:passwordId {url, password}
     delete: /password/:passwordId
 ```
+
+https://blog.logrocket.com/documenting-express-js-api-swagger/#creating-api-model
+
+https://www.mongodb.com/developer/languages/javascript/getting-started-with-mongodb-and-mongoose/#update-data

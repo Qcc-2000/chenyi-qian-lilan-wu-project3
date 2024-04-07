@@ -1,13 +1,10 @@
 import express from "express";
 import MessageModel from "../db/message/model.js";
 import PasswordModel from "../db/password/model.js";
+
 import UserModel from "../db/user/model.js";
 const router = express.Router();
-/*
-    body {
-        "accepted": true,
-    }
-*/
+
 router.post("/:messageId", async function (req, res) {
   const messageId = req.params.messageId;
   const accepted = req.body.accepted;

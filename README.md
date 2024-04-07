@@ -1,21 +1,21 @@
 # Secret Manager
 
-## backend todos
+## Backend
 
-- [ ] docs
+### Todos
 
+- [x] docs
+
+### API Docs
+
+Execute the following bash, open docs in browser with http://localhost:8000/api-docs
+
+```bash
+cd backend
+npm run dev
 ```
-  [user]
-    post: /signup {username, password}
-    post: /login  {username, password}
-    post: /logout
-  [message]
-    get: /messages/:username
-    post: /messages  {sender, receiver}
-    post: /message/:messageId   {accept: true}
-  [password]
-    get: /passwords/:username
-    post: /passwords/ {owner, url, password}
-    put: /password/:passwordId {url, password}
-    delete: /password/:passwordId
-```
+
+### Resources
+
+- [MongoDB](https://www.mongodb.com/)
+- [Swagger](https://swagger.io/)
