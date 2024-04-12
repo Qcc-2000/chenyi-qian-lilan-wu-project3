@@ -38,6 +38,7 @@ const addSharedPassword = async (passwords, shared_with) => {
 
 router.post("/", async function (req, res) {
   const message = req.body;
+  console.log(message);
   const sender = message.sender;
   const receiver = message.receiver;
   // check if sender and receiver are valid
