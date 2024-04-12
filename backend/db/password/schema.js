@@ -13,6 +13,10 @@ export const PasswordSchema = new Schema({
     type: String,
     required: true,
   },
+  update_time: {
+    type: Date,
+    default: Date.now,
+  },
   shared_with: [
     {
       type: String,
