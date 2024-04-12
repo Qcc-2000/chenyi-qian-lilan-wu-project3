@@ -11,7 +11,13 @@ const deletePasswordById = (passwordId) => {
 const updatePassword = (password) => {
   return PasswordModel.updateOne(
     { _id: password._id },
-    { $set: { url: password.url, password: password.password } }, // Update fields
+    {
+      $set: {
+        url: password.url,
+        password: password.password,
+        update_time: password.update_time,
+      },
+    }, // Update fields
     { new: true } // Set to true to return the updated document
   );
 };

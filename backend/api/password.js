@@ -20,13 +20,14 @@ router.get("/:username", async function (req, res) {
 
 router.post("/", async function (req, res) {
   const password = req.body;
+  password.update_time = new Date();
   await PasswordModel.createPassword(password);
   res.send("Password created!");
 });
 
 router.put("/:passwordId", async function (req, res) {
   const password = req.body;
-  console.log(password);
+  password.update_time = new Date();
   await PasswordModel.updatePassword(password);
   res.send("Password updated!");
 });
