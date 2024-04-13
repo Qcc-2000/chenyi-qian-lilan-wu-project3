@@ -17,8 +17,6 @@ router.post("/login", async function (req, res) {
 
   try {
     const createUserResponse = await UserModel.findUserByUsername(username);
-
-    console.log(createUserResponse);
     console.log(createUserResponse.password);
     console.log(password);
     if (createUserResponse.password !== password) {

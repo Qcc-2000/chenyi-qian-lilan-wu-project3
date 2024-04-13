@@ -6,49 +6,50 @@ import Login from "./components/Login.jsx";
 import SignUp from "./components/SignUp.jsx";
 import Message from "./components/Message.jsx";
 import UserContext from "./components/UserContext";
+import { Toaster } from "sonner";
 import { useState } from "react";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Home />,
     errorElement: <NotFoundPage />,
   },
   {
-    path: '/login',
+    path: "/login",
     element: <Login />,
     errorElement: <NotFoundPage />,
   },
   {
-    path: '/signup',
+    path: "/signup",
     element: <SignUp />,
     errorElement: <NotFoundPage />,
   },
   {
-    path: '/passwordsmanager',
+    path: "/passwordsmanager",
     element: <PasswordsManager />,
     errorElement: <NotFoundPage />,
   },
   {
-    path: '/message',
+    path: "/message",
     element: <Message />,
     errorElement: <NotFoundPage />,
-  }
-
+  },
 ]);
 
 function App() {
   const [loginState, setLoginState] = useState({
     isLogin: false,
-    loginUsername: ''
+    loginUsername: "",
   });
 
   return (
-    <UserContext.Provider value={{ loginState, setLoginState }}>
-
-      <RouterProvider router={router} />
-    </UserContext.Provider>
-
+    <>
+      <Toaster />
+      <UserContext.Provider value={{ loginState, setLoginState }}>
+        <RouterProvider router={router} />
+      </UserContext.Provider>
+    </>
   );
 }
 
