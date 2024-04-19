@@ -1,12 +1,15 @@
 import { Link, Outlet } from "react-router-dom";
-
+import React, { useContext } from 'react';
 import NavBeforeLogin from "./NavBeforeLogin";
+import UserContext from './UserContext';
+import NavAfterLoginHome from './NavAfterLoginHome';
 
 export default function Home () {
+    const { loginState, setLoginState } = useContext(UserContext);
+    
     return (
         <div>
-            <NavBeforeLogin />
-            
+            { loginState.isLogin ? <NavAfterLoginHome /> : <NavBeforeLogin />}
             <div className="flex flex-col justify-center items-center m-10">
                 <h1 className="text-2xl text-slate-800 font-bold m-5">The Password Manageer introduction</h1>
                 <div className="flex flex-col justify-start items-start gap-5 m-10">

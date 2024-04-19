@@ -16,7 +16,7 @@ export default function OwnPasswordListBox({ owner, passwordListState, deletePas
                         <div>
                         <div>URL: {item.url}</div>
                         <div>Password: {item.password}</div>
-                        <div className="text-sm text-gray-600">Date: </div>
+                        <div className="text-sm text-gray-600">Date: {item.update_time}</div>
                         </div>
 
 

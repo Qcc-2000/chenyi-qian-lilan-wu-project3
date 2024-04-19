@@ -18,7 +18,7 @@ export default function SharePasswordListBox ({ owner, passwordListState}) {
                         <div>
                         <div>URL: {item.url}</div>
                         <div className="w-50">Password: {item.password}</div>
-                        <div className="w-50 text-sm text-gray-600">Date: </div>
+                        <div className="w-50 text-sm text-gray-600">Date: {item.update_time}</div>
                         </div>
                         <div className="w-50">Shared by: {item.owner}</div>
 

@@ -13,6 +13,7 @@ router.get("/:username", async function (req, res) {
       url: password.url,
       password: password.password,
       owner: password.owner,
+      update_time: password.update_time
     };
   });
   res.send(displayPassord);
