@@ -9,11 +9,10 @@ import OwnPasswordListBox from "./OwnPasswordListBox";
 import SharePasswordListBox from "./SharePasswordListBox";
 import ShareRequestBox from "./ShareRequestBox";
 import Message from "./Message";
+import { useNavigate } from 'react-router';
 
 export default function PasswordsManager() {
-  const { loginState, setLoginState } = useContext(UserContext);
   const [passwordListState, setPasswordListState] = useState([]);
-
   const [errorState, setErrorState] = useState('');
   const [urlState, setUrlState] = useState('');
   const [passwordState, setPasswordState] = useState('');
@@ -23,35 +22,33 @@ export default function PasswordsManager() {
   const [useSymbols, setUseSymbols] = useState(false);
   const [length, setLength] = useState('');
 
+  const [loginUsername, setLoginUsername] = useState('');
+  const  navigate = useNavigate();
+
+
   const [editingState, setEditingState] = useState({
     isEditing: false,
     editingPasswordId: '',
   });
 
-//   let passwordListStateTest = [{_id: '1', url: 'http:1', password: 'pw1', owner: 'lilan'}, 
-//   {_id: '2', url: 'http:2', password: 'pw2', owner: 'lilan'}, 
-//   {_id: '3', url: 'http:3', password: 'pw3', owner: 'zz'},
-//   {_id: '4', url: 'http:4', password: 'pw4', owner: 'qcy'},
-// ];
 
 
-
-  async function getPasswordList() {
-    const response = await axios.get('/api/passwords/' + loginState.loginUsername);
+  async function getPasswordListInitial(username) {
+    console.log(username);
+    const response = await axios.get('/api/passwords/' + username);
     setPasswordListState(response.data);
-    // console.log(passwordListState);
-    // setPasswordListState(passwordListStateTest);
-
   }
 
+  async function getPasswordList() {
+    console.log(loginUsername);
+    const response = await axios.get('/api/passwords/' + loginUsername);
+    setPasswordListState(response.data);
+  }
 
 
   async function deletePassword(passwordId) {
     await axios.delete('/api/passwords/' + passwordId);
     getPasswordList();
-    // passwordListStateTest = passwordListStateTest.filter(item => item._id !== passwordId); 
-    // getPasswordList();
-
   }
 
   // functions for add/update password
@@ -87,7 +84,7 @@ export default function PasswordsManager() {
         setErrorState('At least one checkbox must be checked to generate a password.');
         return;
       }
-      if (length < 4 || length > 50) {
+      if (length == null || length < 4 || length > 50) {
         setErrorState('Length must be between 4 and 50.');
         return;
       }
@@ -106,21 +103,13 @@ export default function PasswordsManager() {
           password: finalPassword,
           _id: editingState.editingPasswordId
         });
-        // const index = passwordListStateTest.findIndex(item => item._id === editingState.editingPasswordId);
-
-        // if (index !== -1) {
-        //   passwordListStateTest[index].url = urlState;
-        //   passwordListStateTest[index].password = finalPassword;
-        // }
 
       } else {
         await axios.post('/api/passwords', {
           url: urlState,
           password: finalPassword,
-          owner: loginState.loginUsername
+          owner: loginUsername
         })
-
-        // passwordListStateTest.push({_id: '5', url: urlState, password: finalPassword, owner: loginState.loginUsername});
       }
       setUrlState('');
       setPasswordState('');
@@ -166,20 +155,41 @@ export default function PasswordsManager() {
     setErrorState('');
   }
 
+  async function isLoggedIn() {
+    try {
+      const response = await axios.get('/api/users/isLoggedIn');
+      console.log(response.data.username);
+      setLoginUsername(response.data.username);
+      return response.data.username;
+    } catch (e) {
+      navigate('/')
+    }
+  }
 
-  useEffect(() => {
-    getPasswordList();
-  }, []);
+  function onStart() {
+    isLoggedIn()
+      .then((username) => {
+        getPasswordListInitial(username)
+      })
+    
+  }
+
+  useEffect(onStart, []);
+
+
+  if(!loginUsername) {
+    return <div>Loading...</div>
+  }
 
   return (
     <div className="flex justify-center flex-col">
-      <NavAfterLogin />
+      <NavAfterLogin username={loginUsername}/>
       <div className="mx-20">
-        <Message receiver={loginState.loginUsername} getPasswordList={getPasswordList}/>
-        <OwnPasswordListBox owner={loginState.loginUsername} passwordListState={passwordListState} deletePassword={deletePassword} setEditingPassword={setEditingPassword} />
-        <SharePasswordListBox owner={loginState.loginUsername} passwordListState={passwordListState} />
+        <Message receiver={loginUsername} getPasswordList={getPasswordList}/>
+        <OwnPasswordListBox owner={loginUsername} passwordListState={passwordListState} deletePassword={deletePassword} setEditingPassword={setEditingPassword} />
+        <SharePasswordListBox owner={loginUsername} passwordListState={passwordListState} />
         <AddUpdateBox editingState={editingState} errorState={errorState} urlState={urlState} setUrlState={setUrlState} passwordState={passwordState} setPasswordState={setPasswordState} useAlphabet={useAlphabet} useNumerals={useNumerals} useSymbols={useSymbols} setUseAlphabet={setUseAlphabet} setUseNumerals={setUseNumerals} setUseSymbols={setUseSymbols} length={length} setLength={setLength} handleSubmit={handleSubmit} handleCancel={handleCancel} />
-        <ShareRequestBox sender={loginState.loginUsername} />
+        <ShareRequestBox sender={loginUsername} />
 
       </div>
       

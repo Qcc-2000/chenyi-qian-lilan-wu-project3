@@ -4,11 +4,12 @@ import NavBeforeLogin from "./NavBeforeLogin";
 import UserContext from './UserContext';
 import { useState } from "react";
 import axios from "axios";
+import NavAfterLogin from "./NavAfterLogin";
 
-export default function Home () {
+export default function HomeAfterLogin () {
     return (
         <div>
-            <NavBeforeLogin />
+            <NavAfterLogin />
             <div className="flex flex-col justify-center items-center m-10">
                 <h1 className="text-2xl text-slate-800 font-bold m-5">The Password Manageer introduction</h1>
                 <div className="flex flex-col justify-start items-start gap-5 m-10">

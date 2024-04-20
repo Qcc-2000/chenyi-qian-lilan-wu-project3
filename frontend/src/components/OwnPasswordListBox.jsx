@@ -23,13 +23,13 @@ export default function OwnPasswordListBox({ owner, passwordListState, deletePas
                         <div className="flex items-center space-x-2">
                             <button
                                 onClick={() => setEditingPassword(item.url, item.password, item._id)}
-                                className="bg-amber-600 hover:bg-amber-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                className="bg-amber-600 hover:bg-amber-400 text-white text-xs font-bold p-1 rounded focus:outline-none focus:shadow-outline"
                             >
                                 Update
                             </button>
                             <button
                                 onClick={() => deletePassword(item._id)}
-                                className="bg-red-900 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                className="bg-red-900 hover:bg-red-700 text-white text-xs font-bold p-1 rounded focus:outline-none focus:shadow-outline"
                             >
                                 Delete
                             </button>

@@ -12,19 +12,8 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
     const navigate = useNavigate();
-    const { loginState, setLoginState } = useContext(UserContext);
 
-    function redirect() {
-        console.log(loginState);
-        if (loginState.isLogin) {
-            console.log("login already");
-            navigate('/passwordsmanager');
-        }
-    }
 
-    useEffect(() => {
-        redirect();
-    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -49,11 +38,6 @@ export default function Login() {
     
             // Check if the status code is 2xx
             if (response.status >= 200 && response.status < 300) {
-                const newLoginState = {
-                    isLogin: true,
-                    loginUsername: username
-                };
-                setLoginState(newLoginState);
                 navigate('/passwordsmanager');
             } else {
                 setErrorMsg(data.message || 'An error occurred during login');

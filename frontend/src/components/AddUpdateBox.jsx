@@ -27,7 +27,7 @@ export default function AddUpdateBox ( { editingState, errorState, urlState, set
                 onInput={(event) => setPasswordState(event.target.value)}
               />
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-2">
             <div className="flex items-center">
               <input
                 id="alphabet-checkbox"
@@ -36,7 +36,7 @@ export default function AddUpdateBox ( { editingState, errorState, urlState, set
                 onChange={(e) => setUseAlphabet(e.target.checked)}
                 className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
               />
-              <label htmlFor="alphabet-checkbox" className="ml-2 block text-sm text-gray-700">
+              <label htmlFor="alphabet-checkbox" className="ml-2 block text-xs text-gray-700">
                 Alphabet
               </label>
             </div>
@@ -48,7 +48,7 @@ export default function AddUpdateBox ( { editingState, errorState, urlState, set
                 onChange={(e) => setUseNumerals(e.target.checked)}
                 className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
               />
-              <label htmlFor="numerals-checkbox" className="ml-2 block text-sm text-gray-700">
+              <label htmlFor="numerals-checkbox" className="ml-2 block text-xs text-gray-700">
                 Numerals
               </label>
             </div>
@@ -60,7 +60,7 @@ export default function AddUpdateBox ( { editingState, errorState, urlState, set
                 onChange={(e) => setUseSymbols(e.target.checked)}
                 className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
               />
-              <label htmlFor="symbols-checkbox" className="ml-2 block text-sm text-gray-700">
+              <label htmlFor="symbols-checkbox" className="ml-2 block text-xs text-gray-700">
                 Symbols
               </label>
             </div>

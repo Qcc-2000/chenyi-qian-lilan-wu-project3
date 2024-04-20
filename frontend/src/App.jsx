@@ -38,18 +38,12 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const [loginState, setLoginState] = useState({
-    isLogin: false,
-    loginUsername: "",
-  });
+
 
   return (
-    <>
-      <Toaster />
-      <UserContext.Provider value={{ loginState, setLoginState }}>
-        <RouterProvider router={router} />
-      </UserContext.Provider>
-    </>
+    <div>
+      <RouterProvider router={router} />
+    </div>
   );
 }
 
