@@ -1,7 +1,5 @@
 import MaxWidth from "./MaxWidth";
-import { NavLink, Outlet } from "react-router-dom";
-import { useContext } from "react";
-import UserContext from "./UserContext";
+import { NavLink } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -12,7 +10,6 @@ export default function NavAfterLogin({ username }) {
         await axios.post('/api/users/logOut');
         navigate('/');
     }
-
 
     return (
         <div className="sticky inset-x-0 top-0 z-30 w-full bg-white">
@@ -33,11 +30,11 @@ export default function NavAfterLogin({ username }) {
                         </div>
 
                         <div className="hover:font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                        <NavLink to="/passwordsmanager" className={({ isActive }) => {
-                            return isActive ? 'text-red-900 font-bold' : ''
-                        }}>
-                            Passwords Manager Page
-                        </NavLink>
+                            <NavLink to="/passwordsmanager" className={({ isActive }) => {
+                                return isActive ? 'text-red-900 font-bold' : ''
+                            }}>
+                                Passwords Manager Page
+                            </NavLink>
                         </div>
 
                         <div className="hover:font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">

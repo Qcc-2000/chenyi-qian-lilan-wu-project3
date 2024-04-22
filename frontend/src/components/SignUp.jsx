@@ -1,11 +1,9 @@
-import { Link, Outlet } from "react-router-dom";
 import NavBeforeLogin from "./NavBeforeLogin";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
-import UserContext from "./UserContext";
-import { useContext } from "react";
 import axios from "axios";
+import LoginSignupBox from "./LoginSignupBox";
 
 export default function SignUp() {
   const [username, setUsername] = useState('');
@@ -13,10 +11,9 @@ export default function SignUp() {
   const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setErrorMsg(''); // Reset error message
+    setErrorMsg('');
 
     if (!username) {
       setErrorMsg('Username is required');
@@ -27,7 +24,6 @@ export default function SignUp() {
       return;
     }
 
-
     try {
       const response = await axios.post('/api/users/register', {
         username: username,
@@ -37,7 +33,6 @@ export default function SignUp() {
 
       const data = response.data;
 
-      // Check if the status code is 2xx
       if (response.status >= 200 && response.status < 300) {
         navigate('/passwordsmanager');
       } else {
@@ -58,32 +53,8 @@ export default function SignUp() {
   return (
     <div className="flex justify-center flex-col items-center">
       <NavBeforeLogin />
-      
-      <div className="container">
-      <div className="text-xl font-semibold text-gray-800 mb-5">Sign Up</div>
-        <form onSubmit={handleSubmit} className="form">
-          {errorMsg && <div className="error">{errorMsg}</div>}
-          <div className="inputGroup">
-            <label className="label">Username:</label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="input"
-            />
-          </div>
-          <div className="inputGroup">
-            <label className="label">Password:</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="input"
-            />
-          </div>
-          <button type="submit" className="button">Sign up</button>
-        </form>
-      </div>
+
+      <LoginSignupBox title='Sign Up' username={username} setUsername={setUsername} password={password} setPassword={setPassword} errorMsg={errorMsg} handleSubmit={handleSubmit}/>
     </div>
   );
 }

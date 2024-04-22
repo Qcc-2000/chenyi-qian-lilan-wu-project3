@@ -10,10 +10,6 @@ import Home from "./components/Home";
 import NotFoundPage from "./components/NotFoundPage.jsx";
 import Login from "./components/Login.jsx";
 import SignUp from "./components/SignUp.jsx";
-import Message from "./components/Message.jsx";
-import UserContext from "./components/UserContext";
-import { Toaster } from "sonner";
-import { useState } from "react";
 import HomeAfterLogin from "./components/HomeAfterLogin";
 
 const router = createBrowserRouter([
@@ -46,7 +42,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
   </React.StrictMode>,
-  
+
 )

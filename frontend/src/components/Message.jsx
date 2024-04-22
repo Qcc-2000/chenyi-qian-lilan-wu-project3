@@ -8,32 +8,28 @@ export default function Message({ receiver, getPasswordList }) {
   const [selectedMessage, setSelectedMessage] = useState(null);
   const dropdownRef = useRef(null);
 
-  // let messageTest = [{_id: '1', sender: 'zz', receiver: 'lilan'}, {_id: '2', sender: 'qcy', receiver: 'lilan'}];
-
   async function getMessages() {
     try {
-        const response = await axios.get('/api/messages/' + receiver);
-        setMessages(response.data);
-        console.log(response)
-      } catch (error) {
-        console.error('Error fetching messages:', error);
-      }
-    // setMessages(messageTest);
+      const response = await axios.get('/api/messages/' + receiver);
+      setMessages(response.data);
+      console.log(response)
+    } catch (error) {
+      console.error('Error fetching messages:', error);
+    }
   }
-
 
   function hideDropdownClickingOutside() {
     const handleClickOutside = (event) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-          setShowDropdown(false);
-        }
-      };
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-      };
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }
-  
+
   useEffect(() => {
     getMessages();
     hideDropdownClickingOutside();
@@ -47,7 +43,6 @@ export default function Message({ receiver, getPasswordList }) {
         accepted: action,
       });
       console.log(response);
-    // messageTest = messageTest.filter(item => item._id != message._id);
       getMessages();
       getPasswordList();
     } catch (error) {

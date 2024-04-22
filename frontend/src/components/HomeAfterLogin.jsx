@@ -1,12 +1,7 @@
-import { Link, Outlet } from "react-router-dom";
 import React, { useContext, useEffect } from 'react';
-import NavBeforeLogin from "./NavBeforeLogin";
-import UserContext from './UserContext';
-import { useState } from "react";
-import axios from "axios";
 import NavAfterLogin from "./NavAfterLogin";
 
-export default function HomeAfterLogin () {
+export default function HomeAfterLogin() {
     return (
         <div>
             <NavAfterLogin />
@@ -18,8 +13,8 @@ export default function HomeAfterLogin () {
                     </p>
                     <h2 className="text-xl text-slate-800 font-bold">Functions</h2>
                     <ul>
-                        <li>You can store new url and password. You can create the password by your own. 
-                            If you leave the password blank, the password manager will randomly create a neww password for you. 
+                        <li>You can store new url and password. You can create the password by your own.
+                            If you leave the password blank, the password manager will randomly create a neww password for you.
                             Please at least select one check box for alphabet, numerals, symbols, and input a length between 4-50.
                         </li>
                         <li>
@@ -27,13 +22,13 @@ export default function HomeAfterLogin () {
                         </li>
                         <li>You can share your password with another user by inputing the sharer's username.
                             After the share invite receiver accept your share request, both of you can see each other's passwords.
-                            In addition, if someone sent a share invite to you, you would see a message in your password manager page. 
+                            In addition, if someone sent a share invite to you, you would see a message in your password manager page.
                             You can open the message and choose reject or accept.
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-        
+
     );
 }

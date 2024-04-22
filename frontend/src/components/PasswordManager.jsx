@@ -1,6 +1,4 @@
-import { useContext, useEffect } from "react";
-import { NavLink, Outlet } from "react-router-dom";
-import UserContext from "./UserContext";
+import { useEffect } from "react";
 import NavAfterLogin from "./NavAfterLogin";
 import axios from "axios";
 import { useState } from "react";
@@ -23,15 +21,12 @@ export default function PasswordsManager() {
   const [length, setLength] = useState('');
 
   const [loginUsername, setLoginUsername] = useState('');
-  const  navigate = useNavigate();
-
+  const navigate = useNavigate();
 
   const [editingState, setEditingState] = useState({
     isEditing: false,
     editingPasswordId: '',
   });
-
-
 
   async function getPasswordListInitial(username) {
     console.log(username);
@@ -51,7 +46,6 @@ export default function PasswordsManager() {
     getPasswordList();
   }
 
-  // functions for add/update password
   const generatePassword = () => {
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
     const numerals = '0123456789';
@@ -94,7 +88,7 @@ export default function PasswordsManager() {
 
 
     try {
-      if(editingState.isEditing) {
+      if (editingState.isEditing) {
         console.log(urlState);
         console.log(finalPassword);
 
@@ -118,7 +112,7 @@ export default function PasswordsManager() {
       setUseSymbols(false);
       setLength('');
       setEditingState({
-        isEditing: false, 
+        isEditing: false,
         editingPasswordId: '',
       });
       setErrorState('');
@@ -139,9 +133,9 @@ export default function PasswordsManager() {
     setUrlState(url);
     setPasswordState(password);
     setEditingState({
-      isEditing: true, 
+      isEditing: true,
       editingPasswordId: passwordId
-  });
+    });
     setErrorState('');
   }
 
@@ -149,9 +143,9 @@ export default function PasswordsManager() {
     setUrlState('');
     setPasswordState('');
     setEditingState({
-      isEditing: false, 
+      isEditing: false,
       editingPasswordId: '',
-  });
+    });
     setErrorState('');
   }
 
@@ -171,28 +165,27 @@ export default function PasswordsManager() {
       .then((username) => {
         getPasswordListInitial(username)
       })
-    
+
   }
 
   useEffect(onStart, []);
 
 
-  if(!loginUsername) {
+  if (!loginUsername) {
     return <div>Loading...</div>
   }
 
   return (
     <div className="flex justify-center flex-col">
-      <NavAfterLogin username={loginUsername}/>
+      <NavAfterLogin username={loginUsername} />
       <div className="mx-20">
-        <Message receiver={loginUsername} getPasswordList={getPasswordList}/>
+        <Message receiver={loginUsername} getPasswordList={getPasswordList} />
         <OwnPasswordListBox owner={loginUsername} passwordListState={passwordListState} deletePassword={deletePassword} setEditingPassword={setEditingPassword} />
         <SharePasswordListBox owner={loginUsername} passwordListState={passwordListState} />
         <AddUpdateBox editingState={editingState} errorState={errorState} urlState={urlState} setUrlState={setUrlState} passwordState={passwordState} setPasswordState={setPasswordState} useAlphabet={useAlphabet} useNumerals={useNumerals} useSymbols={useSymbols} setUseAlphabet={setUseAlphabet} setUseNumerals={setUseNumerals} setUseSymbols={setUseSymbols} length={length} setLength={setLength} handleSubmit={handleSubmit} handleCancel={handleCancel} />
         <ShareRequestBox sender={loginUsername} />
-
       </div>
-      
+
     </div>
   )
 }
